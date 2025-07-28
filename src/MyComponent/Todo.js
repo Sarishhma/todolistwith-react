@@ -16,7 +16,14 @@ export default function Todo({ jobs, onDelete }) {
      
       <div className="row mt-4">
         {jobs.map((job) => (
-          <div className="col-md-6 col-lg-4 mb-4" key={job.Sno}>
+          <div className="col-md-6 col-lg-4 mb-4 " key={job.Sno} style={{
+            backgroundColor: job.completed ? "#d4edda" : "#fff",
+            textDecoration: job.completed ? "line-through" : "none",
+          }}>
+            <div>
+              <input type="checkbox" checkced={job.completed} onchange={()=>ontoggle(job.sno)} style={{ marginRight: "10px" }}/>
+              
+            </div>
             <div className="card shadow-sm border-0 h-100">
               <div className="card-body">
                 <h5 className="card-title fw-bold text-primary ">

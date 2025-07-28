@@ -1,6 +1,6 @@
 import Todo from "./MyComponent/Todo";
 import './App.css';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function App() {
   const jobs = [
@@ -23,14 +23,30 @@ function App() {
      },
      
   ]
-  const [Joblist,setJobList]=useState(jobs);
+  const [Joblist,setJobList]=useState(()=>{
+    const saved = localStorage.getItem("Joblist");
+    return saved? JSON.parse(saved):jobs;
+  })
+
 
   const[title,setTitle]=useState("");
    const[desc,setDesc]=useState("");
+
+   useEffect(()=>{
+    localStorage.setItem("Joblist",JSON.stringify(Joblist));
+   },[Joblist]);
   const onDelete=(sno)=>{
     const update = Joblist.filter((jobs)=>jobs.Sno!==sno);
   setJobList(update)
   }
+
+  const onToggle=(sno)=>{
+    const update = Joblist.map((job)=>
+   job.sno === sno?{...job, completed:!job.completed}:job
+    );
+    setJobList(update)
+  }
+
   const Add=()=>{
     if(title.trim()=== ""||desc.trim()===""){
 alert("enter both task and description");
@@ -87,7 +103,7 @@ return (
 
     {/* Jobs List */}
     <div className="mt-4">
-      <Todo jobs={Joblist} onDelete={onDelete} />
+      <Todo jobs={Joblist} onDelete={onDelete} onToggle={onToggle} />
     </div>
   </div>
 );
