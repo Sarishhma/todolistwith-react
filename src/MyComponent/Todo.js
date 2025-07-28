@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function Todo({ jobs, onDelete }) {
+export default function Todo({ jobs, onDelete,onToggle }) {
   if (!Array.isArray(jobs)) {
     return (
       <div className="container mt-4">
@@ -20,12 +20,13 @@ export default function Todo({ jobs, onDelete }) {
             backgroundColor: job.completed ? "#d4edda" : "#fff",
             textDecoration: job.completed ? "line-through" : "none",
           }}>
-            <div>
-              <input type="checkbox" checkced={job.completed} onchange={()=>ontoggle(job.sno)} style={{ marginRight: "10px" }}/>
-              
-            </div>
+         
             <div className="card shadow-sm border-0 h-100">
               <div className="card-body">
+                   <div className="d-flex align-items-center mb-2">
+              <input type="checkbox" checked={job.completed} onChange={()=>onToggle(job.Sno)} style={{ marginRight: "10px" }}/>
+              
+            </div>
                 <h5 className="card-title fw-bold text-primary ">
                   {job.Title}
                 </h5>

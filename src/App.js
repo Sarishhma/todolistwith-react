@@ -42,7 +42,7 @@ function App() {
 
   const onToggle=(sno)=>{
     const update = Joblist.map((job)=>
-   job.sno === sno?{...job, completed:!job.completed}:job
+   job.Sno === sno?{...job, completed:!job.completed}:job
     );
     setJobList(update)
   }
@@ -56,6 +56,7 @@ return;
       Sno:Date.now(),
       Title:title,
       desc:desc,
+       completed: false,
     }
     setJobList([...Joblist,newTodo]);
     setTitle("")
@@ -65,7 +66,7 @@ return;
   }
 
   
-const job = jobs;
+
 return (
   
     <div className="container mt-4 bg-body-secondary" >
